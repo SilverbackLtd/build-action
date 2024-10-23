@@ -21,9 +21,5 @@ jobs:
 
       - name: silverback build
         uses: ./
-        with:
-          push: false
-          tag: latest
-          password: ${{ secrets.GITHUB_TOKEN }}
 
 
