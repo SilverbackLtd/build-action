@@ -9,7 +9,7 @@ The images that are built and pushed by the workflow
 ## Example Usage
 ```
 steps:
-  - name: silverback-build-push
+  - name: Build Image
     uses: SilverbackLtd/silverbackltd-build@v3
     
 ```

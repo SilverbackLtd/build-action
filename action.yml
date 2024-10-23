@@ -5,6 +5,12 @@ branding:
   icon: 'check-circle'
   color: 'green'
 
+inputs:
+  push:
+    description: 'Push the image to ghcr'
+    required: false
+    default: 'false'
+
 outpus:
   built_images:
     description: 'List of Docker images that were built and pushed.'
@@ -20,7 +26,7 @@ runs:
     - name: Set Environment Variables
       shell: bash
       run: |
-        echo "REGISTRY=ghcr.io" >> $GITHUB_ENV
+        echo "REGISTRY=" >> $GITHUB_ENV
         echo "IMAGE_NAME=${{ github.repository }}"
         echo "TARGET_DIR=$GITHUB_WORKSPACE/.silverback-images"
         echo "DOCKERFILE_PATTERN=Dockerfile.*"
@@ -60,7 +66,7 @@ runs:
         fi
 
     - name: Log into GitHub Container Registry
-      if: github.event_name != 'pull_request'
+      if: ${{ inputs.push }}
       uses: docker/login-action@v2
       with:
         registry: ${{ env.REGISTRY }}
@@ -79,7 +85,7 @@ runs:
           name=$(basename "$df" | sed 's/Dockerfile\.//')
           tag=${{ env.REGISTRY }}/${{ env.LOWERCASE_OWNER }}/${name}:latest
           docker build -t "$tag" -f "$df" .
-          if [[ "${{ env.GITHUB_EVENT_NAME }}" == "push" && "${{ env.GITHUB_REF }}" == "refs/heads/main" ]]; then
+          if [[ ${{ inputs.push }} ]]; then
             docker push "$tag"
           fi
         done
