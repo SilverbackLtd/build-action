@@ -19,6 +19,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Add required files
+        run: |
+          touch ape-config.yaml
+          touch requirements.txt
+
       - name: silverback build
         uses: ./
         with:
