@@ -1,4 +1,4 @@
-name: 'silverbackltd-build-action'
+name: Silverbackltd Build Action
 author: 'ApeWorX Ltd.'
 description: 'A GitHub Action to build docker images for a silverback repository and push to a container registry'
 branding:
@@ -79,7 +79,7 @@ runs:
       with:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ inputs.secrets }}
 
     - name: Build and Push
       run: |

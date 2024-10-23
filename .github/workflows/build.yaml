@@ -3,10 +3,10 @@ name: Test Container Images
 on:
   push:
     branches:
-      -main
+      - main
   pull_request:
-    release:
-      types: [published]
+  release:
+    types: [published]
 
 jobs:
   test-action:
@@ -23,5 +23,7 @@ jobs:
         uses: ./
         with:
           push: false
+          tag: latest
+          secret: ${{ secrets.GITHUB_TOKEN }}
 
 
