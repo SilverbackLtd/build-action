@@ -30,11 +30,11 @@ runs:
     - name: Set Environment Variables
       run: |
         echo "REGISTRY=" >> $GITHUB_ENV
-        echo "IMAGE_NAME=${{ github.repository }}"
-        echo "TARGET_DIR=./.silverback-images"
-        echo "DOCKERFILE_PATTERN=Dockerfile.*"
-        echo "GITHUB_EVENT_NAME=${{ github.event_name }}"
-        echo "GITHUB_REF=${{ github.ref }}"
+        echo "IMAGE_NAME=${{ github.repository }}" >> $GITHUB_ENV
+        echo "TARGET_DIR=./.silverback-images" >> $GITHUB_ENV
+        echo "DOCKERFILE_PATTERN=Dockerfile.*" >> $GITHUB_ENV
+        echo "GITHUB_EVENT_NAME=${{ github.event_name }}" >> $GITHUB_ENV
+        echo "GITHUB_REF=${{ github.ref }}" >> $GITHUB_ENV
       shell: bash
 
     - name: Check if Directory Exists
