@@ -24,6 +24,6 @@ jobs:
         with:
           push: false
           tag: latest
-          secret: ${{ secrets.GITHUB_TOKEN }}
+          secrets: ${{ secrets.GITHUB_TOKEN }}
 
 

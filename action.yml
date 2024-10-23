@@ -31,7 +31,7 @@ runs:
       run: |
         echo "REGISTRY=" >> $GITHUB_ENV
         echo "IMAGE_NAME=${{ github.repository }}"
-        echo "TARGET_DIR=$GITHUB_WORKSPACE/.silverback-images"
+        echo "TARGET_DIR=./.silverback-images"
         echo "DOCKERFILE_PATTERN=Dockerfile.*"
         echo "GITHUB_EVENT_NAME=${{ github.event_name }}"
         echo "GITHUB_REF=${{ github.ref }}"
