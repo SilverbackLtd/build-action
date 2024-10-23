@@ -7,7 +7,7 @@ branding:
 
 inputs:
   push:
-    description: 'Push the image to ghcr'
+    description: 'Push the image to the configured registry'
     required: false
     default: 'false'
   tag:
