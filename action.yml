@@ -74,7 +74,7 @@ runs:
       shell: bash
 
     - name: Log into GitHub Container Registry
-      if: ${{ inputs.push }}
+      if: ${{ inputs.push == 'true' }}
       uses: docker/login-action@v2
       with:
         registry: ${{ env.REGISTRY }}
@@ -93,7 +93,7 @@ runs:
           name=$(basename "$df" | sed 's/Dockerfile\.//')
           reg_tag=${{ env.REGISTRY }}/${{ env.LOWERCASE_OWNER }}/${name}:${{ inputs.tag }}
           docker build -t "$reg_tag" -f "$df" .
-          if [[ ${{ inputs.push }} ]]; then
+          if [[ ${{ inputs.push == 'true' }} ]]; then
             docker push "$reg_tag"
           fi
         done
