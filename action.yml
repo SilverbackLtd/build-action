@@ -99,7 +99,7 @@ runs:
           name=$(basename "$df" | sed 's/Dockerfile\.//')
           reg_tag=${{ inputs.registry }}/${{ env.LOWERCASE_OWNER }}/${name}:${{ inputs.tag }}
           docker build -t "$reg_tag" -f "$df" .
-          if [[ "${inputs.push}" == "true" ]]; then
+          if [[ "${{ inputs.push }}" == "true" ]]; then
             docker push "$reg_tag"
           fi
         done
