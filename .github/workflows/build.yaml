@@ -1,0 +1,25 @@
+name: Test Container Images
+
+on:
+  push:
+    branches:
+      -main
+  pull_request:
+    release:
+      types: [published]
+
+jobs:
+  test-action:
+    name: Run action
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    steps:
+      - name: silverback build
+        uses: ./
+        with:
+          push: false
+
+
