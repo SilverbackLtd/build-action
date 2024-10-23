@@ -1,5 +1,6 @@
-# silverbackltd-build
-SilverbackLTD Build workflow will automatically generate dockerfiles, build docker images and push those images to ghcr.
+# Silverbackltd Build Workflow
+
+Automatically generate dockerfiles (unless already committed), build docker images and push those images to a configured container registry like GHCR
 
 ## Outputs
 
@@ -10,6 +11,6 @@ The images that are built and pushed by the workflow
 ```
 steps:
   - name: Build Image
-    uses: SilverbackLtd/silverbackltd-build@v3
+    uses: SilverbackLtd/build-action@v1
     
 ```

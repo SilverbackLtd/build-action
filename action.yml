@@ -1,5 +1,5 @@
 name: 'silverbackltd-build-action'
-author: 'Silverback Ltd.'
+author: 'ApeWorX Ltd.'
 description: 'A GitHub Action to build docker images for a silverback repository and push to a container registry'
 branding:
   icon: 'check-circle'
@@ -10,8 +10,15 @@ inputs:
     description: 'Push the image to ghcr'
     required: false
     default: 'false'
+  secrets:
+    description: 'Add your token for ghcr'
+    required: true
+  tag:
+    description: 'Tag of the silverback docker images'
+    required: false
+    default: 'latest'
 
-outpus:
+outputs:
   built_images:
     description: 'List of Docker images that were built and pushed.'
 
@@ -24,7 +31,6 @@ runs:
         fetch-depth: 0
 
     - name: Set Environment Variables
-      shell: bash
       run: |
         echo "REGISTRY=" >> $GITHUB_ENV
         echo "IMAGE_NAME=${{ github.repository }}"
@@ -88,10 +94,10 @@ runs:
         dockerfile_array=()
         for df in $dockerfiles; do
           name=$(basename "$df" | sed 's/Dockerfile\.//')
-          tag=${{ env.REGISTRY }}/${{ env.LOWERCASE_OWNER }}/${name}:latest
-          docker build -t "$tag" -f "$df" .
+          reg_tag=${{ env.REGISTRY }}/${{ env.LOWERCASE_OWNER }}/${name}:${{ input.tag }}
+          docker build -t "$reg_tag" -f "$df" .
           if [[ ${{ inputs.push }} ]]; then
-            docker push "$tag"
+            docker push "$reg_tag"
           fi
         done
       shell: bash
