@@ -21,11 +21,9 @@ inputs:
   username:
     description: 'Add your username for your registry'
     required: false
-    default: ${{ github.actor }}
   password:
     description: 'Add your password for your registry'
     required: false
-    default: ''
 
 outputs:
   built_images:

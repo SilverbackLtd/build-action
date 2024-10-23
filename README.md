@@ -11,32 +11,62 @@ The images that are built and pushed by the workflow
 
 To push to a ghcr registry:
 ```
-steps:
-  - name: Build Image
-    uses: SilverbackLtd/build-action@v1
-    with:
-        push: true
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  your-action:
+    name: Run action
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Image
+        uses: SilverbackLtd/build-action@v1
+        with:
+            push: true
+            tag: v1.0.0
+            registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 To push with a different tag:
 ```
-steps:
-  - name: Build Image
-    uses: SilverbackLtd/build-action@v1
-    with:
-        push: true
-        tag: v1.0.0
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  your-action:
+    name: Run action
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Image
+        uses: SilverbackLtd/build-action@v1
+        with:
+            push: true
+            tag: v1.0.0
+            registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 To just test the build:
 ```
-steps:
-  - name: Build Image
-    uses: SilverbackLtd/build-action@v1
+jobs:
+  your-action:
+    name: Run action
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Build Image
+        uses: SilverbackLtd/build-action@v1
 ```
