@@ -36,7 +36,7 @@ runs:
       if: inputs.push == 'true'
       run: |
         if [[ -z ${{ inputs.username }} ]] || [[ -z ${{ inputs.password }} ]]; then
-          echo "Username and/or Password are missing for the push to the container registry"
+          echo "::error::Username and/or Password are missing for the push to the container registry"
         fi
       shell: bash
 
