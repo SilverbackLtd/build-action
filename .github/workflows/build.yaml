@@ -25,5 +25,7 @@ jobs:
 
       - name: silverback build
         uses: ./
+        with:
+          working-directory: erc-4626
 
 

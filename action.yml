@@ -7,11 +7,11 @@ branding:
 
 inputs:
   push:
-    description: 'Push the image to the configured registry'
+    description: 'Push the image to the configured registry.'
     required: false
     default: 'false'
   tag:
-    description: 'Tag of the silverback docker images'
+    description: 'Tag of the silverback docker images.'
     required: false
     default: 'latest'
   registry:
@@ -19,11 +19,15 @@ inputs:
     required: false
     default: 'ghcr.io'
   username:
-    description: 'Add your username for your registry'
+    description: 'Add your username for your registry.'
     required: false
   password:
-    description: 'Add your password for your registry'
+    description: 'Add your password for your registry.'
     required: false
+  working-directory:
+    description: 'The working directory to perform silverback build.'
+    required: false
+    default: '.'
 
 outputs:
   built_images:
@@ -40,6 +44,7 @@ runs:
         echo "TARGET_DIR=./.silverback-images" >> $GITHUB_ENV
         echo "DOCKERFILE_PATTERN=Dockerfile.*" >> $GITHUB_ENV
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Check if Directory Exists
       id: check_dir
@@ -53,6 +58,7 @@ runs:
           echo "directory_exists=false" >> $GITHUB_OUTPUT
         fi
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Set Lowercase Repository Owner
       id: lowercase_owner
@@ -68,6 +74,7 @@ runs:
         pip install silverback
         silverback build --generate
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Verify Dockerfiles Exist
       run: |
@@ -76,6 +83,7 @@ runs:
           exit 1
         fi
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Log into GitHub Container Registry
       if: inputs.push == 'true'
@@ -102,3 +110,4 @@ runs:
           fi
         done
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
