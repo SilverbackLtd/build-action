@@ -25,10 +25,7 @@ jobs:
 
       - name: show cd
         run: |
-          pwd
-          ls -larth
           cp -r erc-4626/* .
-          ls -larth
         shell: bash
 
       - name: silverback build

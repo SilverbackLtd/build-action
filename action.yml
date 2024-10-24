@@ -44,6 +44,8 @@ runs:
     - name: Check if Directory Exists
       id: check_dir
       run: |
+        pwd
+        ls -larth
         if [ -d "${{ env.TARGET_DIR }}" ]; then
           echo "Directory exists."
           echo "directory_exists=true" >> $GITHUB_OUTPUT
