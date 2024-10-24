@@ -32,6 +32,14 @@ outputs:
 runs:
   using: 'composite'
   steps:
+    - name: Confirm inputs
+      if: inputs.push == 'true'
+      run: |
+        if [[ -z ${{ inputs.username }} ]] || [[ -z ${{ inputs.password }} ]]; then
+          echo "Username and/or Password are missing for the push to the container registry"
+        fi
+      shell: bash
+
     - name: Set Environment Variables
       run: |
         echo "IMAGE_NAME=${{ github.repository }}" >> $GITHUB_ENV
