@@ -23,6 +23,12 @@ jobs:
           repository: ApeAcademy/erc-4626
           path: erc-4626
 
+      - name: show cd
+        run: |
+          pwd
+          ls -larth
+        shell: bash
+
       - name: silverback build
         uses: ./
         with:
