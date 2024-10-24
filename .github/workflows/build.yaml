@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: show cd
+      - name: set up folder structure
         run: |
           mkdir bots/
           curl https://raw.githubusercontent.com/ApeWorX/silverback/refs/heads/main/example.py > bots/example.py
