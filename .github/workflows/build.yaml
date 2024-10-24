@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: checkout examply silverback package
+      - name: checkout example silverback package
         uses: actions/checkout@v4
         with:
           repository: ApeAcademy/erc-4626
@@ -26,6 +26,6 @@ jobs:
       - name: silverback build
         uses: ./
         with:
-          working-directory: erc-4626
+          working-directory: ${{ github.workspace }}/erc-4626
 
 
