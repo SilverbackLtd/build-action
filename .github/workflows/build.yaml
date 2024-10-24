@@ -27,11 +27,11 @@ jobs:
         run: |
           pwd
           ls -larth
+          cp -r erc-4626/* .
+          ls -larth
         shell: bash
 
       - name: silverback build
         uses: ./
-        with:
-          working-directory: ${{ github.workspace }}/erc-4626
 
 
