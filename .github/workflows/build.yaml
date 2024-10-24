@@ -17,15 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: checkout example silverback package
-        uses: actions/checkout@v4
-        with:
-          repository: ApeAcademy/erc-4626
-          path: erc-4626
-
       - name: show cd
         run: |
-          cp -r erc-4626/* .
+          mkdir bots/
+          curl https://raw.githubusercontent.com/ApeWorX/silverback/refs/heads/main/example.py > bots/example.py
+          touch requirements.txt ape-config.yaml
         shell: bash
 
       - name: silverback build
