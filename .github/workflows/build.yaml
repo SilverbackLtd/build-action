@@ -17,6 +17,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: checkout examply silverback package
+        uses: actions/checkout@v4
+        with:
+          repository: ApeAcademy/erc-4626
+          path: erc-4626
+
       - name: silverback build
         uses: ./
 
