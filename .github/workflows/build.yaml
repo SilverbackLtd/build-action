@@ -1,0 +1,36 @@
+name: Test Container Images
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  release:
+    types: [published]
+
+jobs:
+  test-action:
+    name: Run action
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: set up folder structure
+        run: |
+          mkdir bots/
+          curl https://raw.githubusercontent.com/ApeWorX/silverback/refs/heads/main/example.py > bots/example.py
+          touch requirements.txt ape-config.yaml
+        shell: bash
+
+      - name: silverback build
+        uses: ./
+
+      - name: test bad input
+        uses: ./
+        continue-on-error: true
+        with:
+          push: true
+
+
