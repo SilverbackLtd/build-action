@@ -21,7 +21,7 @@ jobs:
         run: curl https://raw.githubusercontent.com/ApeWorX/silverback/refs/heads/main/example.py > bot.py
         shell: bash
 
-      - name: silverback build
+      - name: run action
         uses: ./
 
   test-folder:
@@ -38,6 +38,9 @@ jobs:
           curl https://raw.githubusercontent.com/ApeWorX/silverback/refs/heads/main/example.py > bot/__init__.py
         shell: bash
 
+      - name: run action
+        uses: ./
+
   test-folder-multiple:
     name: Run action with `bots/`
     runs-on: ubuntu-latest
@@ -53,7 +56,7 @@ jobs:
           cp bots/example1.py bots/example2.py
         shell: bash
 
-      - name: silverback build
+      - name: run action
         uses: ./
 
 
