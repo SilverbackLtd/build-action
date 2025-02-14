@@ -59,4 +59,21 @@ jobs:
       - name: run action
         uses: ./
 
+  test-missing-file:
+    name: Run action without a file
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: must-fail
+        name: run action
+        continue-on-error: true
+        uses: ./
+
+      - name: check result
+        if: steps.must-fail.outcome == 'success'
+        run: exit 1
+
 
