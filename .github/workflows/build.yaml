@@ -1,4 +1,4 @@
-name: Test Container Images
+name: Action
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   test-root:
-    name: Run action with `bot.py`
+    name: with `bot.py`
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -25,7 +25,7 @@ jobs:
         uses: ./
 
   test-folder:
-    name: Run action with `bot/`
+    name: with `bot/`
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -42,7 +42,7 @@ jobs:
         uses: ./
 
   test-folder-multiple:
-    name: Run action with `bots/`
+    name: with `bots/`
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -60,7 +60,7 @@ jobs:
         uses: ./
 
   test-missing-file:
-    name: Run action without a file
+    name: without a file
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -71,6 +71,29 @@ jobs:
         name: run action
         continue-on-error: true
         uses: ./
+
+      - name: check result
+        if: steps.must-fail.outcome == 'success'
+        run: exit 1
+
+  test-missing-login:
+    name: without login
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: set up test
+        run: curl https://raw.githubusercontent.com/ApeWorX/silverback/refs/heads/main/example.py > bot.py
+        shell: bash
+
+      - id: must-fail
+        name: run action
+        continue-on-error: true
+        uses: ./
+        with:
+          push: true
 
       - name: check result
         if: steps.must-fail.outcome == 'success'
