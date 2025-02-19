@@ -63,6 +63,11 @@ runs:
         fi
       shell: bash
 
+    - name: Set Lowercase IMAGE_NAME
+      run: |
+        LOWERCASE_IMAGE_NAME=$(echo "${{ env.IMAGE_NAME }}" | tr '[:upper:]' '[:lower:]')
+        echo "IMAGE_NAME=$LOWERCASE_IMAGE_NAME" >> $GITHUB_ENV
+      shell: bash
     - name: Generate Files
       id: gen_files
       if: steps.check_dir.outputs.directory_exists == 'false'
@@ -97,7 +102,7 @@ runs:
         dockerfile_array=()
         for df in $dockerfiles; do
           name=$(basename "$df" | sed 's/Dockerfile\.//')
-          reg_tag="${{ inputs.registry }}/${{ env.IMAGE_NAME@L }}-${name:-bot}:${{ inputs.tag }}"
+          reg_tag="${{ inputs.registry }}/${{ env.IMAGE_NAME }}-${name:-bot}:${{ inputs.tag }}"
           docker build -t "$reg_tag" -f "$df" .
           if [[ "${{ inputs.push }}" == "true" ]]; then
             docker push "$reg_tag"
