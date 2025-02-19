@@ -97,7 +97,7 @@ runs:
         dockerfile_array=()
         for df in $dockerfiles; do
           name=$(basename "$df" | sed 's/Dockerfile\.//')
-          reg_tag="${{ inputs.registry }}/${{ env.IMAGE_NAME }}${name}:${{ inputs.tag }}"
+          reg_tag="${{ inputs.registry }}/${{ env.IMAGE_NAME }}-${name:-bot}:${{ inputs.tag }}"
           docker build -t "$reg_tag" -f "$df" .
           if [[ "${{ inputs.push }}" == "true" ]]; then
             docker push "$reg_tag"
