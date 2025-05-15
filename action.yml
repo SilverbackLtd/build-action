@@ -50,7 +50,7 @@ runs:
 
     # TODO: Can this be done using a Docker image instead?
     - name: Install Silverback
-      run: pip install "git+https://github.com/ApeWorX/silverback.git@fix/build/setuptools-scm-version"
+      run: pip install "silverback>=0.7.22"
       shell: bash
 
     - name: Log into GitHub Container Registry
