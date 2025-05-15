@@ -62,5 +62,5 @@ runs:
         password: ${{ inputs.password }}
 
     - name: Build and Push
-      run: silverback build --generate --tag-base ${{ env.TAG_BASE }} --version ${{ inputs.tag }} ${{ inputs.push && '--push' }}
+      run: silverback build --generate --tag-base ${{ env.TAG_BASE }} --version ${{ inputs.tag }} ${{ inputs.push == 'true' && '--push' || ''}}
       shell: bash
